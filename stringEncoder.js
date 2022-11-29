@@ -3,6 +3,7 @@ const toArr = Array.from(input);
 let newString = '';
 let showDetailMatch = [];
 let showDetailNonMatch = [];
+
 for (let i = 0; i < toArr.length; i += 1) {
   const slice = toArr.slice(i, i + 1).toString();
   const indexOf = toArr.indexOf(slice)
