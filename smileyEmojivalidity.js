@@ -10,9 +10,9 @@ const mapCaseCheck = smiley.map((curr) => {
   return `${firstCheck}, ${secondCheck}, ${thirdCheck}`
 
 });
-console.log(mapCaseCheck)
 for (let i = 0; i < mapCaseCheck.length; i += 1){
   if (mapCaseCheck[i].search('false') < 1) {
     console.log(`valid emoji is ${smiley[i]}`)
   }
 }
+
