@@ -1,8 +1,28 @@
+/*
+! manual for this app: its task is to -> add user for meal days, deleting meal days, show user all info
+* addImpInfo: is for adding user information as -> (name, id, gender, days, month, year)
+? showInfo : for showing user information as -> (name, id)
+* deleteDays: for deleting existing users days as -> (id, days)
+*/
+
 const fciStoreMealDays = {
   name: "BangaBandhu Hall",
+  /// returnDays(name1, name2) {
+  // //  for (let i of this.storeDays) {
+  //  //   if (i.name == name1 || i.name == name2) {
+  //  // console.log("name found", i.days);
+  //   //    console.log("name found", i.days);
+  //  //   }
+  //  // }
+  //// },
   storeDays: [],
+  // testOfStoreDays() {
+  //   // for (let i of this.storeDays) {
+  //   console.log(this.storeDays);
+  //   // }
+  // },
   addImpInfo(name, id, gender, days, month, year) {
-    const tempObject = {};
+    let tempObject = {};
     const [...extractDays] = days;
     tempObject.name = name;
     tempObject.id = id;
@@ -15,24 +35,32 @@ const fciStoreMealDays = {
   showInfo(name, id) {
     let gender = "";
     let days = "";
-    let month = "";
+    let months = "";
     let year = "";
     for (let i of this.storeDays) {
-      gender += `${i.gender}`;
-      days += ` ${i.days}`;
-      month += `${i.month}`;
-      year += `${i.year}`;
+      if (i.days.length == 0) {
+        days += `no days found`;
+      }
+      if (i.id == id) {
+        gender += `${i.gender}`;
+        days += ` ${i.days}`;
+        months += `${i.month}`;
+        year += `${i.year}`;
+      }
     }
-    console.log(`welcome to ${this.name}.`);
+    console.log(`---welcome to ${this.name}---`);
     console.log(`your name: ${name}, id: ${id}, gender: ${gender}.`);
     console.log(`meal on for: (days) -> ${days}`);
-    console.log(`meal on for (month) -> ${this.fixMonth()}, year: ${year}`);
+    console.log(`meal on for (month) -> ${this.fixMonth(id)}, year: ${year}`);
   },
-  fixMonth() {
+  fixMonth(id) {
     let getMonth = Number("");
     let fixedMonth = "";
     for (let i of this.storeDays) {
-      getMonth += i.month;
+      if (i.id == id) {
+        // console.log(i.month, "from fix month");
+        getMonth += i.month;
+      }
     }
     switch (getMonth) {
       case 1:
@@ -78,10 +106,17 @@ const fciStoreMealDays = {
     let storeMainDay = [];
     // ! store main days in another array
     for (let i of this.storeDays) {
-      storeMainDay.push(...i.days);
+      if (i.id == id) {
+        storeMainDay.push(...i.days);
+      }
     }
+    // console.log(storeMainDay, "first");
     // ! finding id
     for (let i of this.storeDays) {
+      if (i.days.length == 0) {
+        storeMainDay.splice(storeMainDay.indexOf(1), 1);
+      }
+      // ! deleting multiple days
       if (i.id == id) {
         for (let j = 0; j < storeMainDay.length; j += 1) {
           for (let k = 0; k < days.length; k += 1) {
@@ -92,31 +127,37 @@ const fciStoreMealDays = {
         }
       }
     }
+    // console.log(storeMainDay, "second");
     for (let i of this.storeDays) {
-      if (i.days) {
+      if (i.id == id) {
+        // console.log(i.id, "return id from delete");
         return (i.days = storeMainDay);
       }
     }
   },
 };
 
+// fciStoreMealDays.fixMonth();
+
+fciStoreMealDays.addImpInfo("jibon", 1600, "male", [1, 3, 5, 7], 12, 2022);
+fciStoreMealDays.addImpInfo("nishat", 1604, "male", [5, 6], 12, 2022);
 fciStoreMealDays.addImpInfo(
-  "jibon",
-  1600,
+  "rasik",
+  1602,
   "male",
-  [5, 6, 7, 8, 9, 10],
+  [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
   12,
   2022
 );
-// fciStoreMealDays.addImpInfo("nishat", 1604, "male", [5, 6], 12, 2022);
-// fciStoreMealDays.addImpInfo(
-//   "rasik",
-//   1609,
-//   "male",
-//   [5, 6, 7, 8, 9, 10],
-//   12,
-//   2022
-// );
-// fciStoreMealDays.showInfo("jibon", 1600);
-fciStoreMealDays.deleteDays(1600, [7, 8, 9]);
+// fciStoreMealDays.testOfStoreDays();
+// fciStoreMealDays.returnDays('jibon', 'nishat')
 fciStoreMealDays.showInfo("jibon", 1600);
+fciStoreMealDays.showInfo("nishat", 1604);
+fciStoreMealDays.showInfo("rasik", 1602);
+fciStoreMealDays.deleteDays(1600, [3, 7]); // * jibon deleting
+fciStoreMealDays.deleteDays(1604, [6]); // * nishat deleting
+fciStoreMealDays.deleteDays(1602, [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]); // * rasik deleting
+fciStoreMealDays.showInfo("jibon", 1600);
+fciStoreMealDays.showInfo("nishat", 1604);
+fciStoreMealDays.showInfo("rasik", 1602);
+// * todo: hav to fix deletinG days
