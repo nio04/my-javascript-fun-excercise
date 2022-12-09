@@ -3,7 +3,7 @@ const getHour = date.getHours();
 const getMinute = date.getMinutes();
 const getSecond = date.getSeconds();
 const getWeekDays = date.getDay();
-const getDays = Number(date.getDate());
+let getDays = Number(date.getDate());
 const getMonth = date.getMonth();
 const getYear = date.getFullYear();
 
@@ -53,5 +53,23 @@ if (getHour > 12) {
 console.log(`today is: ${fixedWeek}
 current time is: ${fixedHour}${addAM_PM}: ${getMinute}: ${getSecond}`);
 
-// * fix day
+// ! another format showing date : mm-dd-yyyy
+// * fix month
+const monthFixed = getMonth + 1;
 
+function fixeDateForOneDigit(getDate) {
+  const toString = getDate.toString();
+  let toArr = Array.from(toString);
+  if (toArr.length == 1) {
+    toArr.unshift('0');
+  } else {
+    return getDate;
+  }
+  return toArr.toString().replaceAll(',', '');
+}
+const fixedDays = fixeDateForOneDigit(getDays);
+const fixedMonth = fixeDateForOneDigit(monthFixed)
+
+console.log(
+  `another format for showing date are: [mm-dd-yyyy] ${fixedMonth}-${fixedDays}-${getYear}`
+);
