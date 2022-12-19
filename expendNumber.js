@@ -30,6 +30,8 @@ if (toNumVeryLastDigit != 0 && input.length == 2) {
 
 
 /*
-! get this kinds of format: 10 + 2 = 12 -- while input was 12 
+! get this kinds of format: 10 + 2 = 12 -- while input was 12
 ! get this kinds of format: 120 + 2 = 122 -- while input was 122
+! get this kinds of format: 100 + 0 = 100 -- while input was 100
+
 */
