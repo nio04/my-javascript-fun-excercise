@@ -1,10 +1,24 @@
-const test = ["1", "5", "0"];
+const test = ["9", "3", "2"];
 
-const slice = test.slice(-1);
+const rando = () => {
+  return Math.trunc(Math.random() * 3);
+};
 
-const sliceToNum = Number(slice);
+let store = [];
 
-if (sliceToNum == 0) {
-  const getLastTwoNum = test.slice(-2, -1);
-  console.log(getLastTwoNum)
+store.push(rando());
+store.push(rando());
+store.push(rando());
+
+
+for (let i = 0; i < 5; i += 1) {
+  console.log(store[i])
+  if (store[i + 1] === store[i]) {
+    console.log('test', store[i + 1], store[i])
+    while (store[i + 1] !== store[i]) {
+      store[i] = rando()
+    }
+  }
 }
+
+console.log(store);

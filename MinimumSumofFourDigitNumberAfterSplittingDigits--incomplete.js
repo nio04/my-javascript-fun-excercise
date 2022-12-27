@@ -1,32 +1,19 @@
-const input = "2932";
-const arr = Array.from(input);
-const [first, second, third, forth] = arr;
-const arrForNum = [
-  first + second,
-  first + third,
-  second + first,
-  second + second,
-  second + third,
-  second + forth,
-  third + first,
-  third + second,
-  third + third,
-  third + forth,
-  forth + second,
-  forth + third,
-];
-let stoereResult = [];
-for (let i = 0; i < arrForNum.length - 1; i += 1) {
-  console.log(
-    `${arrForNum[i]} + ${arrForNum[i + 1]} --res: ${
-      Number(arrForNum[i]) + Number(arrForNum[i + 1])
-    }`
-  );
-  stoereResult.push(Number(arrForNum[i]) + Number(arrForNum[i + 1]));
-}
+/*
+take any integer > scramble it > for each scramble, sum it && lastly print the minimum sum
+*/
 
-let max = stoereResult[0];
-for (let i of stoereResult) {
-  if(i < max) max = i
+const input = "293";
+const toArr = Array.from(input);
+
+let storeResult = [];
+
+const randomGenerator = () => {
+  return Math.trunc(Math.random() * 3);
+};
+
+for (let i = 0; i < input.length * 2; i += 1) {
+  // console.log(`${randomGenerator()} ${randomGenerator()} ${randomGenerator()}`);
+  const genrateString = toArr[randomGenerator()] + toArr[randomGenerator()] + toArr[randomGenerator()]
+  storeResult.push(genrateString)
 }
-console.log(max)
+console.log(storeResult)
